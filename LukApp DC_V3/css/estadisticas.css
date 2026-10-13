@@ -1,0 +1,506 @@
+
+/* =========================================================
+   LukApp · estadisticas.css
+   Depende de estilos.css y dashboard.css
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONTENEDOR Y MÉTRICAS
+   ========================================================= */
+
+.estadisticas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.estadisticas-container .page-header {
+    margin-bottom: 0;
+}
+
+.estadisticas-container .summary-cards-grid {
+    margin-bottom: 0;
+}
+
+/* Evitar que los textos largos desborden las tarjetas. */
+.estadisticas-container .summary-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   2. GRÁFICOS GENERALES
+   ========================================================= */
+
+.charts-grid {
+    --chart-height: 300px;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.chart-card {
+    min-width: 0;
+    padding: 20px;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-card);
+}
+
+.chart-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.chart-card-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.chart-card-header .section-eyebrow {
+    margin-bottom: 2px;
+}
+
+.chart-subtitle {
+    flex: 0 0 auto;
+    padding-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+    text-align: right;
+}
+
+/* Contenedor de Chart.js con altura definida. */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: var(--chart-height);
+    min-width: 0;
+}
+
+.chart-wrapper canvas {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   3. DESGLOSE POR CATEGORÍA
+   ========================================================= */
+
+.estadisticas-container .table-responsive-container {
+    padding: 20px;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-card);
+}
+
+.breakdown-header {
+    margin-bottom: 8px;
+}
+
+.breakdown-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.breakdown-header .section-eyebrow {
+    margin-bottom: 2px;
+}
+
+.category-breakdown-list {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.breakdown-item {
+    display: grid;
+
+    grid-template-columns:
+        28px
+        minmax(0, 1.2fr)
+        minmax(80px, 2fr)
+        56px
+        96px;
+
+    align-items: center;
+    gap: 14px;
+
+    padding: 13px 0;
+
+    border-top: 1px solid var(--border-color);
+}
+
+.breakdown-item:first-child {
+    border-top: 0;
+}
+
+.breakdown-item__rank {
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.breakdown-item__name {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    min-width: 0;
+    overflow: hidden;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.breakdown-item__dot {
+    flex: 0 0 auto;
+
+    width: 8px;
+    height: 8px;
+
+    background: var(--category-color, var(--primary-color));
+    border-radius: 50%;
+}
+
+.breakdown-item__percent,
+.breakdown-item__amount {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+}
+
+.breakdown-item__percent {
+    color: var(--text-muted);
+}
+
+.breakdown-item__amount {
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   4. ENCABEZADO DE ESTADÍSTICAS
+   ========================================================= */
+
+.stats-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 24px;
+}
+
+
+/* =========================================================
+   5. CUADRÍCULA DE KPI
+   ========================================================= */
+
+.stats-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+
+    margin-bottom: 24px;
+}
+
+.stats-kpi-note {
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   6. DISTRIBUCIÓN DE GRÁFICOS
+   ========================================================= */
+
+/* Fila superior: comparativa amplia y donut compacto. */
+.charts-layout-top {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 24px;
+}
+
+/* Fila inferior: dos paneles de igual anchura. */
+.charts-layout-bottom {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+
+/* =========================================================
+   7. LEYENDA PERSONALIZADA DEL DONUT
+   ========================================================= */
+
+.custom-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    min-width: 0;
+
+    font-size: 12px;
+}
+
+.legend-item__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    min-width: 0;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.legend-item__color {
+    flex: 0 0 auto;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 2px;
+}
+
+.legend-item__value {
+    flex: 0 0 auto;
+
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+
+    color: var(--text-muted);
+}
+
+
+/* =========================================================
+   8. RANKING EN LA FILA INFERIOR
+   ========================================================= */
+
+.charts-layout-bottom .breakdown-item {
+    grid-template-columns:
+        22px
+        minmax(0, 1.2fr)
+        minmax(60px, 1.5fr)
+        48px
+        88px;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   9. FILTROS SEGMENTADOS
+   ========================================================= */
+
+.filter-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    padding: 4px;
+
+    background: var(
+        --bg-secondary,
+        rgba(128, 128, 128, 0.12)
+    );
+
+    border-radius: 10px;
+}
+
+.tab-btn {
+    padding: 6px 14px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary, inherit);
+}
+
+.tab-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.tab-btn.active {
+    background: var(--primary-color, #FFD233);
+    color: var(--on-primary, #111111);
+}
+
+
+/* =========================================================
+   10. RESPONSIVE: TABLETS Y PANTALLAS MEDIANAS
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .charts-layout-top,
+    .charts-layout-bottom {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   11. RESPONSIVE: MÓVILES
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .charts-grid {
+        --chart-height: 240px;
+    }
+
+    .chart-card,
+    .estadisticas-container .table-responsive-container {
+        padding: 16px;
+    }
+
+    .estadisticas-container .page-header .select-filter {
+        width: 100%;
+    }
+
+    /* Nombre, posición y monto en la primera fila.
+       Barra y porcentaje en la segunda fila. */
+    .breakdown-item {
+        grid-template-columns: 24px minmax(0, 1fr) auto;
+        column-gap: 10px;
+        row-gap: 8px;
+    }
+
+    .breakdown-item__rank {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .breakdown-item__name {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .breakdown-item__amount {
+        grid-column: 3;
+        grid-row: 1;
+
+        font-size: 11px;
+    }
+
+    .breakdown-item__bar {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .breakdown-item__percent {
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    /* Mantener el ranking compacto en móvil. */
+    .charts-layout-bottom .breakdown-item {
+        grid-template-columns: 24px minmax(0, 1fr) auto;
+        column-gap: 10px;
+        row-gap: 8px;
+    }
+
+    .stats-page-header {
+        align-items: stretch;
+    }
+
+    .stats-page-header .select-filter {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   12. RESPONSIVE: MÓVILES ESTRECHOS
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .stats-kpi-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .filter-tabs {
+        max-width: 100%;
+    }
+
+    .tab-btn {
+        padding: 6px 10px;
+    }
+
+    .chart-card-header {
+        flex-wrap: wrap;
+    }
+
+    .chart-subtitle {
+        text-align: left;
+    }
+}

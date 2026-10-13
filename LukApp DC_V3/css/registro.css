@@ -1,0 +1,6 @@
+/* Hereda el core visual de login para no duplicar código CSS */
+@import url('login.css');
+
+.login-form-container .input-group {
+    margin-bottom: 6px;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="LukApp - Gestión y organización financiera">
+
+    <title>LukApp</title>
+
+    <!-- SCRIPT BLOQUEANTE PRE-PAINT: Evita el parpadeo blanco/oscuro del tema -->
+    <script>
+        (function() {
+            try {
+                // Leer rápidamente de la sesión si el tema fue guardado globalmente
+                const themePref = localStorage.getItem('lukapp_theme_setting') || 'light';
+                let resolvedTheme = themePref;
+                
+                if (themePref === 'auto') {
+                    const hour = new Date().getHours();
+                    resolvedTheme = (hour >= 18 || hour < 6) ? 'dark' : 'light';
+                }
+                
+                document.documentElement.dataset.theme = resolvedTheme;
+            } catch (e) {}
+        })();
+    </script>
+</head>
+
+<body>
+
+    <!--
+        Punto de entrada de LukApp.
+
+        Este archivo no representa una pantalla de la aplicación.
+        Su función es determinar si existe una sesión activa y
+        redirigir al usuario al lugar correspondiente.
+    -->
+
+    <main
+        id="app-loading"
+        aria-live="polite">
+
+        <p>Iniciando LukApp...</p>
+
+    </main>
+
+
+    <script>
+        /*
+         * Bootstrap inicial de la aplicación.
+         * La clave "lukapp_session" será utilizada por el
+         * módulo de autenticación para representar la sesión
+         * local mientras no exista una API/backend.
+         */
+
+        (() => {
+
+            const SESSION_KEY = 'lukapp_session';
+
+            const usuarioAutenticado =
+                localStorage.getItem(SESSION_KEY);
+
+            const destino = usuarioAutenticado
+                ? 'dashboard.html'
+                : 'login.html';
+
+            window.location.replace(destino);
+
+        })();
+    </script>
+
+</body>
+</html>

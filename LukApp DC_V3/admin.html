@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LukApp - Administración Global</title>
+    <!-- Mismas hojas de estilos globales -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <!-- CDN de Chart.js para estadísticas globales -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="app-layout">
+        
+        <!-- SIDEBAR ADMINISTRATIVA -->
+        <aside class="sidebar admin-sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-container">
+                    <span class="logo-icon" style="background: var(--danger-color);">A</span>
+                    <span class="logo-text">LukApp <span class="badge-pro" style="color:var(--danger-color); background:var(--danger-soft);">ADMIN</span></span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <span class="nav-section-title">ADMINISTRACIÓN</span>
+                <ul class="nav-list" id="adminNavList">
+                    <li class="nav-item active"><button type="button" class="nav-link-btn" data-target="panel"><span class="nav-icon">⌂</span><span>Panel General</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link-btn" data-target="usuarios"><span class="nav-icon">👥</span><span>Usuarios</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link-btn" data-target="estadisticas"><span class="nav-icon">📈</span><span>Estadísticas Globales</span></button></li>
+                    <li class="nav-item"><button type="button" class="nav-link-btn" data-target="sistema"><span class="nav-icon">🖥️</span><span>Sistema</span></button></li>
+                </ul>
+
+                <ul class="nav-list nav-bottom">
+                    <li class="nav-item"><button type="button" class="nav-link-btn" data-target="configuracion"><span class="nav-icon">⚙</span><span>Configuración Admin</span></button></li>
+                    <li class="nav-item"><a href="login.html" id="btnLogout"><span class="nav-icon">↪</span><span>Cerrar sesión</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="main-content">
+            
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button type="button" class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <div class="topbar-title">
+                        <span class="topbar-section-label" style="color: var(--danger-color);">Modo Administrador</span>
+                        <h2 id="topbarTitleDynamic">Panel General</h2>
+                    </div>
+                </div>
+                <div class="topbar-actions">
+                    <button type="button" class="topbar-action" id="btnTheme" title="Cambiar tema">◐</button>
+                    <div class="user-profile-widget">
+                        <div class="user-avatar" style="background: var(--danger-color);">A</div>
+                        <div class="user-info">
+                            <span class="user-name">Administrador</span>
+                            <span class="user-plan">Root Access</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-container">
+                
+                <!-- ================== 1. PANEL GENERAL ================== -->
+                <section id="section-panel" class="admin-section active">
+                    <header class="page-header">
+                        <div class="header-titles">
+                            <h1>Resumen Global</h1>
+                            <span class="records-count">Visión general del estado de LukApp</span>
+                        </div>
+                    </header>
+                    
+                    <div class="kpi-grid">
+                        <article class="kpi-card">
+                            <span class="kpi-label">USUARIOS REGISTRADOS</span>
+                            <h2 class="kpi-value mono" id="mockUsers">--</h2>
+                        </article>
+                        <article class="kpi-card">
+                            <span class="kpi-label">MOVIMIENTOS TOTALES</span>
+                            <h2 class="kpi-value mono" id="mockMovements">--</h2>
+                        </article>
+                        <article class="kpi-card">
+                            <span class="kpi-label">METAS CREADAS</span>
+                            <h2 class="kpi-value mono" id="mockGoals">--</h2>
+                        </article>
+                        <article class="kpi-card">
+                            <span class="kpi-label">NOTIFICACIONES</span>
+                            <h2 class="kpi-value mono" id="mockNotifications">--</h2>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ================== 2. USUARIOS ================== -->
+                <section id="section-usuarios" class="admin-section">
+                    <header class="page-header">
+                        <div class="header-titles">
+                            <h1>Gestión de Usuarios</h1>
+                            <span class="records-count">Control y administración de cuentas</span>
+                        </div>
+                        <div class="header-actions">
+                            <input type="search" placeholder="Buscar usuario..." class="admin-search-input">
+                        </div>
+                    </header>
+
+                    <div class="table-responsive-container">
+                        <table class="data-table admin-table">
+                            <thead>
+                                <tr>
+                                    <th>USUARIO</th>
+                                    <th>CORREO</th>
+                                    <th>ROL</th>
+                                    <th>REGISTRO</th>
+                                    <th>ESTADO</th>
+                                    <th class="text-right">ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminUsersTableBody">
+                                <!-- Renderizado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ================== 3. ESTADÍSTICAS GLOBALES ================== -->
+                <section id="section-estadisticas" class="admin-section">
+                    <header class="page-header">
+                        <div class="header-titles">
+                            <h1>Estadísticas Globales</h1>
+                            <span class="records-count">Métricas de adopción y uso</span>
+                        </div>
+                    </header>
+                    
+                    <div class="admin-charts-grid">
+                        <article class="chart-card">
+                            <h3>Crecimiento de Usuarios</h3>
+                            <div class="chart-wrapper" style="height:200px;"><canvas id="chartAdminUsers"></canvas></div>
+                        </article>
+                        <article class="chart-card">
+                            <h3>Volumen de Transacciones</h3>
+                            <div class="chart-wrapper" style="height:200px;"><canvas id="chartAdminTransactions"></canvas></div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ================== 4. SISTEMA ================== -->
+                <section id="section-sistema" class="admin-section">
+                    <header class="page-header">
+                        <div class="header-titles">
+                            <h1>Estado del Sistema</h1>
+                            <span class="records-count">Monitoreo de infraestructura local</span>
+                        </div>
+                    </header>
+
+                    <div class="system-grid">
+                        <div class="system-card">
+                            <div class="system-icon success">✓</div>
+                            <div class="system-info">
+                                <strong>Base de datos local</strong>
+                                <span>localStorage en funcionamiento</span>
+                            </div>
+                        </div>
+                        <div class="system-card">
+                            <div class="system-icon info">i</div>
+                            <div class="system-info">
+                                <strong>Versión del Sistema</strong>
+                                <span>LukApp Core v2.1.0</span>
+                            </div>
+                        </div>
+                        <div class="system-card">
+                            <div class="system-icon warning">!</div>
+                            <div class="system-info">
+                                <strong>Modo Demo</strong>
+                                <span>Desactivado en producción</span>
+                            </div>
+                        </div>
+                        <div class="system-card">
+                            <div class="system-icon">💾</div>
+                            <div class="system-info">
+                                <strong>Espacio utilizado</strong>
+                                <span>Aprox. 240 KB en LocalStorage</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================== 5. CONFIGURACIÓN ================== -->
+                <section id="section-configuracion" class="admin-section">
+                    <header class="page-header">
+                        <div class="header-titles">
+                            <h1>Configuración Admin</h1>
+                            <span class="records-count">Preferencias del panel administrativo</span>
+                        </div>
+                    </header>
+                    <div class="admin-settings-layout">
+                        <!-- Placeholder visual basado en la configuración del usuario -->
+                        <div class="settings-card">
+                            <h3>Configuraciones bloqueadas</h3>
+                            <p class="text-muted">Las preferencias globales del administrador están protegidas en esta fase de desarrollo.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts Nucleares y del Módulo Admin -->
+    <script type="module" src="js/core/app.js"></script>
+    <script type="module" src="js/core/theme.js"></script>
+    <script type="module" src="js/admin/adminController.js"></script>
+</body>
+</html>

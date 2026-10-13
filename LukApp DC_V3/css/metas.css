@@ -1,0 +1,349 @@
+/* =========================================================
+   LukApp · metas.css
+   Depende de estilos.css y dashboard.css (.progress-track,
+   .progress-fill--*, .modal, .empty-state, botones).
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONTENEDOR
+   ========================================================= */
+
+.metas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.metas-container .page-header,
+.metas-container .summary-cards-grid {
+    margin-bottom: 0;
+}
+
+.metas-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.section-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+
+.section-header p {
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   2. GRID DE METAS
+   ========================================================= */
+
+.metas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+}
+
+.metas-grid > .empty-state {
+    grid-column: 1 / -1;
+
+    min-height: 180px;
+
+    background: var(--bg-surface);
+
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--radius-lg);
+}
+
+
+/* =========================================================
+   3. TARJETA DE META
+   Markup sugerido para el View:
+   <article class="meta-card meta-card--info">
+     <header class="meta-card__header">
+       <span class="meta-card__icon">✈️</span>
+       <div class="meta-card__heading">
+         <h3 class="meta-card__title">Vacaciones Europa</h3>
+         <span class="meta-card__deadline">Límite: Jun 2027</span>
+       </div>
+       <span class="meta-card__badge">✓ Completada</span>   (opcional)
+     </header>
+     <p class="meta-card__amount">
+        <strong class="mono">$24.000</strong>
+        <span>de $60.000</span></p>
+     <div class="progress-track">
+        <div class="progress-fill" style="width:40%"></div></div>
+     <div class="meta-card__progress">
+        <span class="meta-card__percent">40%</span>
+        <span class="meta-card__remaining">Faltan $36.000</span></div>
+     <dl class="meta-card__contribution">
+        <dt>Contribución mensual</dt><dd>$3000/mes</dd></dl>
+     <footer class="meta-card__actions">
+        <button class="btn-primary">Abonar</button>
+        <button class="btn-secondary">Editar</button></footer>
+   </article>
+   ========================================================= */
+
+.meta-card {
+    --meta-color: var(--primary-color);
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-width: 0;
+    padding: 20px;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-card);
+}
+
+.meta-card--primary { --meta-color: var(--primary-color); }
+.meta-card--info    { --meta-color: var(--info-color); }
+.meta-card--success { --meta-color: var(--success-color); }
+.meta-card--warning { --meta-color: var(--warning-color); }
+
+/* El relleno de la barra toma el color de la meta */
+.meta-card .progress-fill {
+    background: var(--meta-color);
+}
+
+.meta-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.meta-card__icon {
+    flex: 0 0 auto;
+
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--bg-muted);
+    border-radius: var(--radius-md);
+
+    font-size: 18px;
+    line-height: 1;
+}
+
+.meta-card__heading {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-card__title {
+    overflow: hidden;
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.meta-card__deadline {
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+.meta-card__badge {
+    flex: 0 0 auto;
+    align-self: flex-start;
+
+    padding: 3px 9px;
+
+    color: var(--success-color);
+    background: var(--success-soft);
+    border-radius: var(--radius-pill);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.meta-card__amount {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin-top: 4px;
+}
+
+.meta-card__amount strong {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.meta-card__amount span {
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+
+.meta-card__progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.meta-card__percent {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.meta-card__remaining {
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 11px;
+}
+
+.meta-card__contribution {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    margin: 0;
+    padding-top: 12px;
+
+    border-top: 1px solid var(--border-color);
+
+    font-size: 12px;
+}
+
+.meta-card__contribution dt {
+    color: var(--text-muted);
+}
+
+.meta-card__contribution dd {
+    margin: 0;
+
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+.meta-card__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+.meta-card__actions > :only-child {
+    grid-column: 1 / -1;
+}
+
+/* Meta completada */
+.meta-card--completed {
+    --meta-color: var(--success-color);
+}
+
+
+/* =========================================================
+   4. MODAL · NUEVA META (reutiliza .modal de dashboard.css)
+   ========================================================= */
+
+.modal--meta {
+    --modal-accent: var(--primary-color);
+    --modal-accent-soft: var(--primary-soft);
+}
+
+.modal--meta .modal__submit {
+    color: var(--on-primary);
+}
+
+.modal--meta .modal__submit:hover {
+    background: var(--primary-hover);
+    filter: none;
+}
+
+.icon-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+    gap: 8px;
+}
+
+.icon-option {
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+
+    font-size: 18px;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.icon-option:hover {
+    border-color: var(--border-strong);
+}
+
+.icon-option[aria-pressed="true"],
+.icon-option.is-selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+
+/* =========================================================
+   5. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .metas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .meta-card {
+        padding: 16px;
+    }
+
+    .metas-container .page-header .btn-primary {
+        min-height: 44px;
+    }
+
+}

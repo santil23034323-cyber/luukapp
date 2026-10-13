@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LukApp - Registro</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/registro.css">
+</head>
+<body>
+    <main class="login-layout">
+        <section class="login-branding">
+            <!-- Branding heredado -->
+            <div class="branding-content">
+                <a href="index.html" class="brand-link" aria-label="LukApp">
+                    <img src="img/logo/lukapp-logo-white.svg" alt="LukApp" class="brand-logo">
+                </a>
+                <div class="brand-copy">
+                    <span class="brand-eyebrow">Gestión financiera</span>
+                    <h1 class="brand-title">Finanzas claras.<br>Decisiones inteligentes.</h1>
+                    <div class="brand-description">
+                        <h2>Controla tu dinero, no al revés.</h2>
+                        <p>Únete a LukApp y toma el control absoluto de tu futuro financiero hoy mismo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="login-form-container">
+            <div class="form-wrapper">
+                <header class="form-header">
+                    <span class="form-eyebrow">Comienza ahora</span>
+                    <h2>Crear cuenta</h2>
+                </header>
+                
+                <div class="form-message" id="registerMessage" hidden></div>
+                
+                <form id="registerForm" novalidate>
+                    <!-- Campo Nombre -->
+                    <div class="input-group">
+                        <label for="userName">Nombre completo</label>
+                        <input type="text" id="userName" required placeholder="Tu nombre completo">
+                    </div>
+                    
+                    <!-- Campo Correo -->
+                    <div class="input-group">
+                        <label for="userEmail">Correo electrónico</label>
+                        <input type="email" id="userEmail" required placeholder="correo@ejemplo.com">
+                    </div>
+
+                    <!-- NUEVO: Campo Teléfono -->
+                    <div class="input-group">
+                        <label for="userPhone">Teléfono <span class="text-muted" style="font-weight: normal;">(Opcional)</span></label>
+                        <input type="tel" id="userPhone" placeholder="+57 300 000 0000">
+                    </div>
+
+                    <!-- NUEVO: Campo Ocupación -->
+                    <div class="input-group">
+                        <label for="userOccupation">Ocupación <span class="text-muted" style="font-weight: normal;">(Opcional)</span></label>
+                        <input type="text" id="userOccupation" placeholder="Ej. Desarrollador de Software">
+                    </div>
+
+                    <!-- Campos de Contraseña -->
+                    <div class="input-group">
+                        <label for="userPassword">Contraseña</label>
+                        <input type="password" id="userPassword" required placeholder="Mínimo 6 caracteres">
+                    </div>
+                    <div class="input-group">
+                        <label for="userConfirmPassword">Confirmar contraseña</label>
+                        <input type="password" id="userConfirmPassword" required placeholder="Repite tu contraseña">
+                    </div>
+
+                    <button type="submit" class="btn-primary login-submit" id="btnRegisterSubmit" style="margin-top: 12px;">Crear cuenta en LukApp</button>
+                </form>
+                
+                <footer class="form-footer">
+                    <p>¿Ya tienes cuenta? <a href="login.html" class="signup-link">Inicia sesión</a></p>
+                </footer>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="js/auth/authRegisterController.js"></script>
+</body>
+</html>

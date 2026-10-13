@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LukApp - Metas Financieras</title>
+
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- Estructura compartida del panel -->
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- Estilos específicos -->
+    <link rel="stylesheet" href="css/metas.css">
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+                <a href="dashboard.html" class="logo-container" aria-label="Ir al Dashboard">
+                    <span class="logo-icon">L</span>
+                    <span class="logo-text">
+                        LukApp
+                        <span class="badge-pro">PRO</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Navegación principal">
+
+                <span class="nav-section-title">PRINCIPAL</span>
+
+                <ul class="nav-list">
+
+                    <li class="nav-item">
+                        <a href="dashboard.html">
+                            <span class="nav-icon" aria-hidden="true">⌂</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="movimientos.html">
+                            <span class="nav-icon" aria-hidden="true">↕</span>
+                            <span>Movimientos</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="estadisticas.html">
+                            <span class="nav-icon" aria-hidden="true">◔</span>
+                            <span>Estadísticas</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a href="metas.html" aria-current="page">
+                            <span class="nav-icon" aria-hidden="true">◎</span>
+                            <span>Metas</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul class="nav-list nav-bottom">
+
+                    <li class="nav-item">
+                        <a href="configuracion.html">
+                            <span class="nav-icon" aria-hidden="true">⚙</span>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="login.html" id="btnLogout">
+                            <span class="nav-icon" aria-hidden="true">↪</span>
+                            <span>Cerrar sesión</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+        </aside>
+
+
+        <!-- =====================================================
+             CONTENIDO PRINCIPAL
+        ====================================================== -->
+        <div class="main-content">
+
+            <!-- =================================================
+                 TOPBAR
+            ================================================== -->
+            <header class="topbar" id="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        type="button"
+                        class="sidebar-toggle"
+                        id="sidebarToggle"
+                        aria-label="Abrir menú"
+                        aria-controls="sidebar"
+                        aria-expanded="false">
+                        ☰
+                    </button>
+
+                    <div class="topbar-title">
+                        <span class="topbar-section-label">Panel financiero</span>
+                        <h2>Metas</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-actions">
+
+                    <!-- Buscador -->
+                    <div class="topbar-search">
+                        <span class="search-icon" aria-hidden="true">⌕</span>
+
+                        <input
+                            type="search"
+                            id="globalSearch"
+                            placeholder="Buscar en LukApp..."
+                            autocomplete="off">
+                    </div>
+
+
+                    <!-- Notificaciones -->
+                    <button
+                        type="button"
+                        class="topbar-action"
+                        id="btnNotifications"
+                        aria-label="Ver notificaciones">
+                        ◔
+                    </button>
+
+
+                    <!-- Tema -->
+                    <button
+                        type="button"
+                        class="topbar-action"
+                        id="btnTheme"
+                        aria-label="Cambiar tema"
+                        title="Cambiar tema">
+                        ◐
+                    </button>
+
+
+                    <!-- Perfil -->
+                    <a
+                        href="configuracion.html"
+                        class="user-profile-widget"
+                        aria-label="Abrir configuración de perfil">
+
+                        <div class="user-avatar">U</div>
+
+                        <div class="user-info">
+                            <span class="user-name">Usuario LukApp</span>
+                            <span class="user-plan">Premium</span>
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 CONTENIDO DE METAS
+            ================================================== -->
+            <main class="dashboard-container metas-container">
+
+                <!-- Encabezado -->
+                <header class="page-header">
+
+                    <div class="header-titles">
+                        <span class="page-eyebrow">Planificación financiera</span>
+
+                        <h1>Metas financieras</h1>
+
+                        <span
+                            class="records-count"
+                            id="metasSummaryText">
+                            Cargando resumen de ahorro...
+                        </span>
+                    </div>
+
+                    <div class="header-actions">
+
+                        <button
+                            type="button"
+                            class="btn-primary"
+                            id="btnNuevaMeta">
+                            <span aria-hidden="true">+</span>
+                            Nueva meta
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+                <!-- =================================================
+                     RESUMEN DE METAS
+                ================================================== -->
+                <section
+                    class="summary-cards-grid"
+                    aria-label="Resumen financiero de metas">
+
+                    <!-- Ahorrado -->
+                    <article class="summary-card">
+
+                        <span class="summary-label">
+                            Ahorrado total
+                        </span>
+
+                        <span
+                            class="summary-value positive mono"
+                            id="kpiAhorradoTotal">
+                            $0
+                        </span>
+
+                    </article>
+
+
+                    <!-- Objetivo -->
+                    <article class="summary-card">
+
+                        <span class="summary-label">
+                            Objetivo total
+                        </span>
+
+                        <span
+                            class="summary-value mono"
+                            id="kpiObjetivoTotal">
+                            $0
+                        </span>
+
+                    </article>
+
+
+                    <!-- Progreso -->
+                    <article class="summary-card">
+
+                        <span class="summary-label">
+                            Progreso global
+                        </span>
+
+                        <span
+                            class="summary-value mono"
+                            id="kpiProgresoGlobal">
+                            0%
+                        </span>
+
+                    </article>
+
+                </section>
+
+
+                <!-- =================================================
+                     LISTADO DE METAS
+                ================================================== -->
+                <section
+                    class="metas-section"
+                    aria-labelledby="metasSectionTitle">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2 id="metasSectionTitle">Mis metas</h2>
+                            <p>Administra tus objetivos de ahorro.</p>
+                        </div>
+
+                    </div>
+
+
+                    <!--
+                        El contenido será generado dinámicamente
+                        desde metasController.js
+                    -->
+                    <div
+                        class="metas-grid"
+                        id="metasGridContainer">
+
+                        <!-- Inyección dinámica con JavaScript -->
+
+                    </div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <!-- Tema global -->
+    <script type="module" src="js/core/theme.js"></script>
+
+    <!-- Módulo MVC de Metas -->
+    <script
+        type="module"
+        src="js/metas/metaController.js">
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+/* =========================================================
+   LukApp · movimientos.css
+   Depende de estilos.css (tabla base, .status-pill,
+   .badge-category, .amount-cell, .btn-danger-outline,
+   .select-filter, .hidden) y dashboard.css (.tx-icon).
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONTENEDOR
+   ========================================================= */
+
+.movimientos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.movimientos-container .page-header,
+.movimientos-container .summary-cards-grid {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   2. PANEL DE FILTROS
+   ========================================================= */
+
+.table-controls-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 12px 16px;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-card);
+}
+
+/* Control segmentado: Todos / Ingresos / Gastos */
+.filter-tabs {
+    display: inline-flex;
+    gap: 2px;
+
+    padding: 3px;
+
+    background: var(--bg-muted);
+    border-radius: var(--radius-md);
+}
+
+.tab-btn {
+    min-height: 32px;
+
+    padding: 0 14px;
+
+    color: var(--text-muted);
+
+    border-radius: var(--radius-sm);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+.tab-btn:hover {
+    color: var(--text-color);
+}
+
+.tab-btn.active,
+.tab-btn[aria-selected="true"] {
+    color: var(--text-color);
+    background: var(--bg-surface);
+
+    box-shadow: var(--shadow-xs);
+}
+
+.filter-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.search-box-small {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: 240px;
+    height: 36px;
+
+    padding: 0 12px;
+
+    background: var(--bg-muted);
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.search-box-small:focus-within {
+    background: var(--bg-surface);
+    border-color: var(--primary-color);
+}
+
+.search-box-small > span {
+    color: var(--text-subtle);
+
+    font-size: 17px;
+}
+
+/* El input global trae borde/altura; aquí se integra al contenedor */
+.search-box-small input {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: 0;
+    box-shadow: none;
+
+    font-size: 12px;
+}
+
+.selection-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selected-count {
+    color: var(--text-muted);
+
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   3. TABLA
+   ========================================================= */
+
+.movimientos-container .table-responsive-container {
+    overflow-x: auto;
+
+    background: var(--bg-surface);
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-card);
+}
+
+.data-table {
+    width: 100%;
+    min-width: 480px;
+}
+
+.data-table th {
+    padding: 13px 16px;
+
+    color: var(--text-muted);
+
+    border-bottom: 1px solid var(--border-color);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.data-table td {
+    padding: 13px 16px;
+
+    border-bottom: 1px solid var(--border-color);
+
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.data-table tbody tr {
+    transition: background-color var(--transition-fast);
+}
+
+.data-table tbody tr:hover {
+    background: var(--bg-surface-hover);
+}
+
+/* Fila seleccionada (la marca el controlador o el checkbox) */
+.data-table tbody tr.is-selected,
+.data-table tbody tr:has(input[type="checkbox"]:checked) {
+    background: var(--primary-soft);
+}
+
+.th-checkbox,
+.data-table td:first-child {
+    width: 44px;
+    padding-right: 0;
+}
+
+.th-actions,
+.data-table td:last-child {
+    width: 48px;
+    padding-left: 0;
+    text-align: right;
+}
+
+.data-table input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    cursor: pointer;
+}
+
+/*
+   Celdas generadas por el View (sugerido):
+   <td><div class="cell-description">
+        <span class="tx-icon icon-food">🛒</span>
+        <span class="cell-description__text">Supermercado</span></div></td>
+   <td><span class="badge-category">Alimentación</span></td>
+   <td class="cell-date">10 Sep 2026</td>
+   <td class="amount-cell negative">-$1,240</td>
+   <td><span class="status-pill status-completed">completado</span></td>
+*/
+.cell-description {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.data-table .tx-icon {
+    width: 32px;
+    height: 32px;
+
+    font-size: 14px;
+}
+
+.cell-description__text {
+    overflow: hidden;
+
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cell-date {
+    color: var(--text-muted);
+
+    font-family: var(--font-mono);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.data-table .amount-cell {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.data-table .empty-state {
+    min-height: 160px;
+}
+
+
+/* =========================================================
+   4. PAGINACIÓN
+   ========================================================= */
+
+.pagination-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 0 4px;
+}
+
+.pagination-info {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pagination-controls > button {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 8px;
+
+    color: var(--text-secondary);
+    background: var(--bg-muted);
+
+    border-radius: var(--radius-sm);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    transition:
+        background-color var(--transition-fast),
+        color var(--transition-fast);
+}
+
+.pagination-controls > button:hover:not(:disabled) {
+    color: var(--text-color);
+    background: var(--border-color);
+}
+
+.pagination-controls > button.active,
+.pagination-controls > button[aria-current="page"] {
+    color: var(--on-primary);
+    background: var(--primary-color);
+}
+
+.pagination-controls > button:disabled {
+    color: var(--text-disabled);
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   5. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .search-box-small {
+        width: 200px;
+    }
+
+}
+
+
+/* Se oculta ESTADO (columna 6) */
+@media (max-width: 900px) {
+
+    .data-table th:nth-child(6),
+    .data-table td:nth-child(6) {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .table-controls-panel {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .filter-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .filter-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .search-box-small {
+        width: 100%;
+        height: 40px;
+    }
+
+    .selection-action {
+        justify-content: space-between;
+    }
+
+    .movimientos-container .page-header .header-actions > .btn-primary {
+        flex-basis: 100%;
+        order: -1;
+        min-height: 44px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 12px;
+    }
+
+}
+
+
+/* Se oculta CATEGORÍA (columna 3) */
+@media (max-width: 560px) {
+
+    .data-table th:nth-child(3),
+    .data-table td:nth-child(3) {
+        display: none;
+    }
+
+    .pagination-footer {
+        justify-content: center;
+    }
+
+}
